@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
- */
 package calaverita;
 
 import javax.swing.*;
@@ -13,21 +9,17 @@ import com.itextpdf.text.Document;
 import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.pdf.PdfWriter;
 
-/**
- *
- * @author dcuem
- */
 public class CalaveraLiterariaGUICartel
 {
 
     public static void main(String[] args)
     {
-        JFrame frame = new JFrame("Calavera Literaria de Daniel y Armeli");
+        JFrame frame = new JFrame("Calavera Literaria de Luis Alvares");
         frame.setSize(750, 550);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLayout(new BorderLayout());
 
-        // Panel con degradado de fondo
+        // Panel con degradado de fondo (Morado profundo a Negro)
         JPanel panel = new JPanel()
         {
             @Override
@@ -35,73 +27,72 @@ public class CalaveraLiterariaGUICartel
             {
                 super.paintComponent(g);
                 Graphics2D g2d = (Graphics2D) g;
-                GradientPaint gp = new GradientPaint(0, 0, new Color(255, 228, 225), 0, getHeight(), new Color(255, 182, 193));
+                GradientPaint gp = new GradientPaint(0, 0, new Color(48, 25, 52), 0, getHeight(), Color.BLACK);
                 g2d.setPaint(gp);
                 g2d.fillRect(0, 0, getWidth(), getHeight());
             }
         };
         panel.setLayout(new BorderLayout());
-        panel.setBorder(BorderFactory.createLineBorder(Color.MAGENTA, 6, true));
+        panel.setBorder(BorderFactory.createLineBorder(new Color(255, 140, 0), 6, true)); // Borde Cempasúchil
 
         JTextPane textPane = new JTextPane();
         textPane.setEditable(false);
-        textPane.setOpaque(false); // transparente para ver el degradado
+        textPane.setOpaque(false); // Transparente para ver el degradado
         StyledDocument doc = textPane.getStyledDocument();
 
-        // Estilos GUI
+        // Estilos GUI - Nueva fuente
         Style defaultStyle = StyleContext.getDefaultStyleContext().getStyle(StyleContext.DEFAULT_STYLE);
+        
         Style regular = doc.addStyle("regular", defaultStyle);
-        StyleConstants.setFontFamily(regular, "Segoe Script");
-        StyleConstants.setFontSize(regular, 18);
+        StyleConstants.setFontFamily(regular, "Times New Roman"); // Fuente cambiada
+        StyleConstants.setFontSize(regular, 22); // Tamaño más grande
+        StyleConstants.setForeground(regular, Color.WHITE); // Texto blanco
+        StyleConstants.setItalic(regular, true);
 
-        Style danielStyle = doc.addStyle("daniel", regular);
-        StyleConstants.setForeground(danielStyle, Color.ORANGE);
-        StyleConstants.setBold(danielStyle, true);
-
-        Style armeliStyle = doc.addStyle("armeli", regular);
-        StyleConstants.setForeground(armeliStyle, new Color(139, 0, 139));
-        StyleConstants.setBold(armeliStyle, true);
+        Style luisStyle = doc.addStyle("luis", regular);
+        StyleConstants.setForeground(luisStyle, new Color(255, 140, 0)); // Naranja Cempasúchil
+        StyleConstants.setBold(luisStyle, true);
 
         Style keywordStyle = doc.addStyle("keyword", regular);
-        StyleConstants.setForeground(keywordStyle, new Color(34, 139, 34)); // verde
+        StyleConstants.setForeground(keywordStyle, new Color(228, 0, 124)); // Rosa Mexicano
+        StyleConstants.setBold(keywordStyle, true);
 
-        // Insertar texto GUI
+        // Insertar texto GUI de la Calaverita
         try
         {
-            doc.insertString(doc.getLength(), "Estaba sentado esperando su turno, ", regular);
-            doc.insertString(doc.getLength(), "Daniel", danielStyle);
-            doc.insertString(doc.getLength(), ",\n", regular);
-            doc.insertString(doc.getLength(), "y en el hotel se topó con la huesuda cruel.\n", regular);
-            doc.insertString(doc.getLength(), "Le habló con dulzura, como la más fina ", regular);
-            doc.insertString(doc.getLength(), "miel", keywordStyle);
-            doc.insertString(doc.getLength(), ",\n", regular);
-            doc.insertString(doc.getLength(), "de su dibujo a pincel plasmado en el ", regular);
-            doc.insertString(doc.getLength(), "papel.\n\n", keywordStyle);
+            doc.insertString(doc.getLength(), "\nEstaba en clase aburrido, ", regular);
+            doc.insertString(doc.getLength(), "Luis Alvares", luisStyle);
+            doc.insertString(doc.getLength(), " muy atento,\ncuando llegó la calaca, arruinando su momento.\nLe dijo con voz de frío: “Deja ya ese ", regular);
+            doc.insertString(doc.getLength(), "cuaderno", keywordStyle);
+            doc.insertString(doc.getLength(), ",\nte vienes conmigo ahora, directo para el infierno”.\n\n", regular);
 
-            doc.insertString(doc.getLength(), "La huesuda preguntó por su nombre aquel,\n", regular);
-            doc.insertString(doc.getLength(), "él respondió orgulloso: “Me llamo ", regular);
-            doc.insertString(doc.getLength(), "Armeli", armeliStyle);
-            doc.insertString(doc.getLength(), "”.\n", regular);
-            doc.insertString(doc.getLength(), "La catrina sonrió y dijo: “¡Qué hombre tan fiel!”,\n", regular);
-            doc.insertString(doc.getLength(), "y el catrín celoso murmuró: “Veamos la pelí”.\n\n", regular);
+            doc.insertString(doc.getLength(), "Luis", luisStyle);
+            doc.insertString(doc.getLength(), " la miró de reojo, sin perder la compostura,\nle entregó su lapicero y le dijo con premura:\n“Si me llevas, te encargas de pasar esta ", regular);
+            doc.insertString(doc.getLength(), "asignatura", keywordStyle);
+            doc.insertString(doc.getLength(), "”.\nLa huesuda dio un pasito, temblando de la locura.\n\n", regular);
 
-            doc.insertString(doc.getLength(), "Después salió a pasear, con un poco de frío,\n", regular);
-            doc.insertString(doc.getLength(), "y la parca le dejó una nota en un ", regular);
-            doc.insertString(doc.getLength(), "papel.\n", keywordStyle);
-            doc.insertString(doc.getLength(), "La calaca tocó su piel, pero ", regular);
-            doc.insertString(doc.getLength(), "Daniel", danielStyle);
-            doc.insertString(doc.getLength(), " sonrió,\n", regular);
-            doc.insertString(doc.getLength(), "y escapó de la muerte por un misterioso ", regular);
-            doc.insertString(doc.getLength(), "túnel.\n", keywordStyle);
+            doc.insertString(doc.getLength(), "“Mejor me voy solitita”, gritó la muerte asustada,\n“yo no hago tus exámenes, ni me gusta desvelada”.\nY así fue como ", regular);
+            doc.insertString(doc.getLength(), "Luis", luisStyle);
+            doc.insertString(doc.getLength(), ", con sonrisa dibujada,\nse libró del más allá por una ", regular);
+            doc.insertString(doc.getLength(), "tarea pesada", keywordStyle);
+            doc.insertString(doc.getLength(), ".\n", regular);
+
         } catch (BadLocationException e)
         {
             e.printStackTrace();
         }
 
-        JButton btnPDF = new JButton("Generar PDF");
-        btnPDF.setBackground(new Color(255, 20, 147));
+        // Hacer el ScrollPane completamente transparente
+        JScrollPane scrollPane = new JScrollPane(textPane);
+        scrollPane.setOpaque(false);
+        scrollPane.getViewport().setOpaque(false);
+        scrollPane.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+
+        // Nuevo color de botón
+        JButton btnPDF = new JButton("Generar PDF para Luis");
+        btnPDF.setBackground(new Color(75, 0, 130)); // Morado Oscuro (Índigo)
         btnPDF.setForeground(Color.WHITE);
-        btnPDF.setFont(new java.awt.Font("Segoe Script", java.awt.Font.BOLD, 18));
+        btnPDF.setFont(new java.awt.Font("Times New Roman", java.awt.Font.BOLD, 20));
         btnPDF.setFocusPainted(false);
 
         btnPDF.addActionListener(new ActionListener()
@@ -110,24 +101,27 @@ public class CalaveraLiterariaGUICartel
             {
                 try
                 {
-                    // Usamos nombres completos para evitar conflictos
                     com.itextpdf.text.Document pdfDocument = new com.itextpdf.text.Document();
-                    PdfWriter.getInstance(pdfDocument, new FileOutputStream("CalaveraDanielArmeli.pdf"));
+                    PdfWriter.getInstance(pdfDocument, new FileOutputStream("CalaveraLuisAlvares.pdf"));
                     pdfDocument.open();
-                    pdfDocument.add(new Paragraph("Estaba sentado esperando su turno, Daniel,"));
-                    pdfDocument.add(new Paragraph("y en el hotel se topó con la huesuda cruel."));
-                    pdfDocument.add(new Paragraph("Le habló con dulzura, como la más fina miel,"));
-                    pdfDocument.add(new Paragraph("de su dibujo a pincel plasmado en el papel."));
-                    pdfDocument.add(new Paragraph("La huesuda preguntó por su nombre aquel,"));
-                    pdfDocument.add(new Paragraph("él respondió orgulloso: 'Me llamo Armeli'."));
-                    pdfDocument.add(new Paragraph("La catrina sonrió y dijo: '¡Qué hombre tan fiel!',"));
-                    pdfDocument.add(new Paragraph("y el catrín celoso murmuró: 'Mejor veamos la pelí'."));
-                    pdfDocument.add(new Paragraph("Después salió a pasear, con un poco de frío,"));
-                    pdfDocument.add(new Paragraph("y la parca le dejó una nota en un papel."));
-                    pdfDocument.add(new Paragraph("La calaca tocó su piel, pero Daniel sonrió,"));
-                    pdfDocument.add(new Paragraph("y escapó de la muerte por un misterioso túnel."));
+                    
+                    pdfDocument.add(new Paragraph("Estaba en clase aburrido, Luis Alvares muy atento,"));
+                    pdfDocument.add(new Paragraph("cuando llegó la calaca, arruinando su momento."));
+                    pdfDocument.add(new Paragraph("Le dijo con voz de frío: 'Deja ya ese cuaderno,"));
+                    pdfDocument.add(new Paragraph("te vienes conmigo ahora, directo para el infierno'.\n\n"));
+                    
+                    pdfDocument.add(new Paragraph("Luis la miró de reojo, sin perder la compostura,"));
+                    pdfDocument.add(new Paragraph("le entregó su lapicero y le dijo con premura:"));
+                    pdfDocument.add(new Paragraph("'Si me llevas, te encargas de pasar esta asignatura'."));
+                    pdfDocument.add(new Paragraph("La huesuda dio un pasito, temblando de la locura.\n\n"));
+                    
+                    pdfDocument.add(new Paragraph("'Mejor me voy solitita', gritó la muerte asustada,"));
+                    pdfDocument.add(new Paragraph("'yo no hago tus exámenes, ni me gusta desvelada'."));
+                    pdfDocument.add(new Paragraph("Y así fue como Luis, con sonrisa dibujada,"));
+                    pdfDocument.add(new Paragraph("se libró del más allá por una tarea pesada."));
+                    
                     pdfDocument.close();
-                    JOptionPane.showMessageDialog(frame, "PDF generado con éxito!");
+                    JOptionPane.showMessageDialog(frame, "¡PDF generado con éxito!");
                 } catch (Exception ex)
                 {
                     ex.printStackTrace();
@@ -136,10 +130,25 @@ public class CalaveraLiterariaGUICartel
             }
         });
 
-        panel.add(new JScrollPane(textPane), BorderLayout.CENTER);
+        // 1. Cargamos tu imagen de la calaverita a la derecha
+        ImageIcon iconoDerecho = new ImageIcon("calaverita.jpg");
+        Image imgDer = iconoDerecho.getImage().getScaledInstance(150, 150, Image.SCALE_SMOOTH);
+        JLabel etiquetaDerecha = new JLabel(new ImageIcon(imgDer));
+        etiquetaDerecha.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 20));
+
+        // 2. Creamos "flores" usando texto HTML y Emojis para la izquierda
+        // Usamos <br> para dar saltos de línea y que se vean hacia abajo
+        JLabel etiquetaIzquierda = new JLabel("<html><div style='text-align: center;'>🏵️<br><br>🌺<br><br>🏵️</div></html>");
+        etiquetaIzquierda.setFont(new Font("Segoe UI Emoji", Font.PLAIN, 45)); // Tamaño gigante para que parezca decoración
+        etiquetaIzquierda.setBorder(BorderFactory.createEmptyBorder(0, 20, 0, 0));
+
+        // 3. Ensamblamos todo en el panel
+        panel.add(scrollPane, BorderLayout.CENTER);
+        panel.add(etiquetaDerecha, BorderLayout.EAST); 
+        panel.add(etiquetaIzquierda, BorderLayout.WEST); // Emojis de flores a la izquierda
         panel.add(btnPDF, BorderLayout.SOUTH);
+        
         frame.add(panel, BorderLayout.CENTER);
         frame.setVisible(true);
     }
-
 }
